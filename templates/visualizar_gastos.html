@@ -1,0 +1,133 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-xl-6 col-lg-7">
+                <div class="card shadow mb-4">
+                    <!-- Card Header - Dropdown -->
+                    <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between text-center"> <!-- Aplica text-center aquí -->
+                        <h6 class="m-0" style="font-weight: bold; color: #212529; width: 100%;">Grafico de Gastos</h6>
+                    </div>
+                    <!-- Card Body -->
+                    <div class="card-body text-center">
+                        <div class="table-responsive">
+                            <canvas id="papersDatabase" width="350" height="350"></canvas>
+                        </div>
+                        <br>
+                        <br>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-6 col-lg-7">
+                <div class="card shadow mb-4">
+                    <!-- Card Header - Dropdown -->
+                    <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between text-center" > <!-- Aplica text-center aquí -->
+                        <h6 class="m-0" style="font-weight: bold; color: #212529; width: 100%;">Gastos por Categoria</h6>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive" style="overflow-y: auto; max-height: 320px;">
+                            <table class="table table-bordered" id="dataTable" >
+                                <tr>
+                                    <th>Categoría</th>
+                                    <th>Gasto</th>
+                                </tr>
+                                {% for categoria, valor in categorias.items() %}
+                                    <tr>
+                                        <td>{{ categoria }}</td>
+                                        <td>${{ valor }}</td>
+                                    </tr>
+                                {% endfor %}
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="text-center">
+        <form action="{{ url_for('index') }}" method="get">
+            <button type="submit" class="btn btn-primary btn-block btn-large">Regresar</button>
+        </form>
+    </div>
+
+    <script src="{{ url_for('static', filename='grafico.js') }}"></script>
+    <script>
+        // Recuperar las variables JSON y analizarlas en JavaScript
+        var labels = JSON.parse('{{ labels | tojson | safe }}');
+        var datos = JSON.parse('{{ datos | tojson | safe }}');
+
+        // Ahora puedes usar las variables labels y datos en JavaScript
+        generarGrafico(labels, datos);
+    </script>
+
+{% endblock %}
+
+
+{#{% extends "base.html" %}#}
+{##}
+{#{% block content %}#}
+{##}
+{#    <div class="container">#}
+{#        <div class="row justify-content-center">#}
+{#            <div class="col-xl-6 col-lg-7">#}
+{#                <div class="card shadow mb-4">#}
+{#                    <!-- Card Header - Dropdown -->#}
+{#                    <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">#}
+{#                        <h6 class="m-0"style="font-weight: bold; color: #212529">Grafico de Gastos</h6>#}
+{#                    </div>#}
+{#                    <!-- Card Body -->#}
+{#                    <div class="card-body text-center">#}
+{#                        <div class="table-responsive">#}
+{#                            <canvas id="papersDatabase" width="350" height="350"></canvas>#}
+{#                        </div>#}
+{#                        <br>#}
+{#                        <br>#}
+{#                    </div>#}
+{#                </div>#}
+{#            </div>#}
+{#            <div class="col-xl-6 col-lg-7">#}
+{#                <div class="card shadow mb-4">#}
+{#                    <!-- Card Header - Dropdown -->#}
+{#                    <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">#}
+{#                        <h6 class="m-0 "style="font-weight: bold; color: #212529">Gastos por Categoria</h6>#}
+{#                    </div>#}
+{#                    <div class="card-body">#}
+{#                        <div class="table-responsive" style="overflow-y: auto; max-height: 320px;"> <!-- Ajusta la altura máxima según tu preferencia -->#}
+{#                            <table class="table table-bordered" id="dataTable" >#}
+{#                                <tr>#}
+{#                                    <th>Categoría</th>#}
+{#                                    <th>Gasto</th>#}
+{#                                </tr>#}
+{#                                {% for categoria, valor in categorias.items() %}#}
+{#                                    <tr>#}
+{#                                        <td>{{ categoria }}</td>#}
+{#                                        <td>{{ valor }}</td>#}
+{#                                    </tr>#}
+{#                                {% endfor %}#}
+{#                            </table>#}
+{#                        </div>#}
+{#                    </div>#}
+{#                </div>#}
+{#            </div>#}
+{#        </div>#}
+{#    </div>#}
+{#    <div class="text-center">#}
+{#        <form action="{{ url_for('index') }}" method="get">#}
+{#            <button type="submit" class="btn btn-primary btn-block btn-large">Regresar</button>#}
+{#        </form>#}
+{#    </div>#}
+{##}
+{#    <script src="{{ url_for('static', filename='grafico.js') }}"></script>#}
+{#    <script>#}
+{#        // Recuperar las variables JSON y analizarlas en JavaScript#}
+{#        var labels = JSON.parse('{{ labels | tojson | safe }}');#}
+{#        var datos = JSON.parse('{{ datos | tojson | safe }}');#}
+{##}
+{#        // Ahora puedes usar las variables labels y datos en JavaScript#}
+{#        generarGrafico(labels, datos);#}
+{#    </script>#}
+{##}
+{#{% endblock %}#}
+{##}

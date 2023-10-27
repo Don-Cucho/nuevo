@@ -1,0 +1,103 @@
+{% extends "base.html" %}
+
+<style>
+    /* Aplicar un tamaño fijo a todos los botones */
+    .btn-fixed-size {
+        width: 150px; /* Personaliza el ancho según tus necesidades */
+        height: 150px; /* Personaliza la altura según tus necesidades */
+    }
+</style>
+
+{% block content %}
+    <!-- Header-->
+    <header class="py-5">
+        <div class="container px-lg-5">
+            <div class="p-4 p-lg-5 bg-light rounded-3 text-center">
+                <h1 class="display-5 fw-bold">Gestor de Gastos Personales!</h1>
+                <p class="fs-4">Este sistema te ayudará a estar
+                    al tanto de cómo manejas tu dinero y así podrás ser más responsable</p>
+            </div>
+        </div>
+    </header>
+    <!-- Page Content-->
+    <section class="pt-4">
+        <div class="container px-lg-5">
+            <!-- Page Features-->
+            <div class="row gx-lg-5">
+                <div class="col-lg-6 col-xxl-6 mb-5">
+                    <div class="card bg-light border-0 h-100">
+                        <div class="card-body text-center p-4 p-lg-5 pt-0 pt-lg-0">
+                            <!-- Enlace a la página correspondiente -->
+                            <div class="feature bg-gradient text-white rounded-3 mb-4 mt-n4">
+                                <form action="{{ url_for('index') }}" method="post">
+                                    <button class="btn btn-primary btn-lg btn-fixed-size" name="opcion" value="1">
+                                        <i class="fa fa-money" aria-hidden="true"></i>
+                                    </button>
+                                </form>
+                            </div>
+                            <h2 class="fs-4 fw-bold">Agregar Gastos</h2>
+                            <p class="mb-0">Agrega tus gastos personales y clasifícalos por categorías!</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-xxl-6 mb-5">
+                    <div class="card bg-light border-0 h-100">
+                        <div class="card-body text-center p-4 p-lg-5 pt-0 pt-lg-0">
+                            <div class="feature bg-gradient text-white rounded-3 mb-4 mt-n4">
+
+                                <form action="{{ url_for('index') }}" method="post">
+                                    <button class="btn btn-primary btn-lg" name="opcion" value="2">
+                                        <i class="fa fa-area-chart" aria-hidden="true"></i>
+                                    </button>
+                                </form>
+                            </div>
+                            <h2 class="fs-4 fw-bold">Visualización de Gastos</h2>
+                            <p class="mb-0">Mira un resumen de tus gastos organizados por categoría!</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-xxl-6 mb-5">
+                    <div class="card bg-light border-0 h-100">
+                        <div class="card-body text-center p-4 p-lg-5 pt-0 pt-lg-0">
+                            <div class="feature bg-gradient text-white rounded-3 mb-4 mt-n4">
+
+                                <form action="{{ url_for('index') }}" method="post">
+                                    <button class="btn btn-primary btn-lg" name="opcion" value="3">
+                                        <i class="fa fa-bar-chart" aria-hidden="true"></i>
+                                    </button>
+                                </form>
+                            </div>
+                            <h2 class="fs-4 fw-bold">Resumen de Gastos Mensuales</h2>
+                            <p class="mb-0">Revisa un resumen mensual de gastos para cada categoría!</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-xxl-6 mb-5">
+                    <div class="card bg-light border-0 h-100">
+                        <div class="card-body text-center p-4 p-lg-5 pt-0 pt-lg-0">
+                            <div class="feature bg-gradient text-white rounded-3 mb-4 mt-n4">
+                                <form action="{{ url_for('index') }}" method="post">
+                                    <button class="btn btn-primary btn-lg btn-fixed-size" name="opcion" value="4">
+                                        <i class="fa fa-trash-o" aria-hidden="true"></i>
+                                    </button>
+                                </form>
+                            </div>
+                            <h2 class="fs-4 fw-bold">Eliminar Gastos</h2>
+                            <p class="mb-0">Elimina los gastos que no se agregaron correctamente!</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container px-lg-5">
+            <div class="p-4 p-lg-5 bg-light rounded-3 text-center">
+                <div class="m-4 m-lg-5">
+                    <p class="fs-4">Este proyecto ha sido desarrollado por Marcelo Romero y Josué Quevedo con el
+                        objetivo de aprobar Estructura de Datos 🤓.</p>
+                    <a class="btn btn-primary btn-lg" href="{{ url_for('documentacion') }}">Leer Documentación</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+{% endblock %}

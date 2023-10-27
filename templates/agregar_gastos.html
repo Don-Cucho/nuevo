@@ -1,0 +1,90 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="container px-lg-3">
+        <div class="p-3 p-lg-5 bg-light rounded-3 text-center">
+            <div class="row align-items-center justify-content-center ">
+                <div class="col-lg-5">
+                    <div class="card shadow mb-4">
+                        <div class="card-body text-center bg-light">
+                            <form action="{{ url_for('agregar_gastos') }}" method="post">
+                                <!-- Tu formulario de agregar gastos aquí -->
+                                <div class="m-4">
+                                    <label for="exampleFormControlInput1" class="form-label"><b>Agregar Gastos</b></label>
+                                    <label for="exampleFormControlInput1" class="form-label"><b>Agregar Gastos</b></label>
+                                    <div class="input-group mb-3 d-flex justify-content-center">
+                                        <span class="input-group-text">$</span>
+                                        <input type="text" class="form-control" style="max-width: 150px;"
+                                               name="gastos" required="required" pattern="\d+(\.\d{0,2})?"
+                                               oninput="validateDecimal(this)" placeholder="Ingrese valor 0.00">
+                                    </div>
+
+                                    <label for="fecha" class="form-label"><b>Fecha:</b></label>
+                                    <input type="date" name="fecha" id="fecha" class="form-control mx-auto" style="max-width: 200px;" required="required">
+                                    <br>
+                                    <label for="categoria" class="form-label"><b>Selecciona una categoría</b>:</label>
+                                    <select class="form-select mx-auto" name="categoria" id="categoria" required style="max-width: 200px;">
+                                        <option value="" disabled selected>Selecciona Categoría</option>
+                                        <option value="Alimentación">Alimentación</option>
+                                        <option value="Transporte">Transporte</option>
+                                        <option value="Entretenimiento">Entretenimiento</option>
+                                        <option value="Salud">Salud</option>
+                                        <option value="Educación">Educación</option>
+                                        <option value="Otros">Otros</option>
+                                    </select>
+                                    <br>
+                                    <button type="submit" class="btn btn-primary">Agregar Gasto</button>
+                                    <br>
+                                    <br>
+                                    <b>{{ text }}</b>
+                                    <br>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-5">
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                            <h6 class="m-0" style="font-weight: bold; color: #212529;">Historial de gastos</h6>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive" style="overflow-y: auto; max-height: 320px;">
+                                <!-- Ajusta la altura máxima según tu preferencia -->
+                                <table class="table table-bordered" id="dataTable">
+                                    <tr>
+                                        <th>Categoría</th>
+                                        <th>Gasto</th>
+                                        <th>Fecha</th>
+                                    </tr>
+                                    {% for dato in lista %}
+                                        <tr>
+                                            <td>{{ dato['categoria'] }}</td>
+                                            <td>${{ dato['gasto'] }}</td>
+                                            <td>{{ dato['fecha'] }}</td>
+                                        </tr>
+                                    {% endfor %}
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center">
+                <form action="{{ url_for('index') }}" method="get">
+                    <button type="submit" class="btn btn-primary btn-block btn-large">Regresar</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script>
+        function validateDecimal(input) {
+            input.value = input.value.replace(/[^0-9.]|(\.\d\d).+/g, '$1');
+            if (parseFloat(input.value) === 0.00) {
+                input.setCustomValidity('El valor no puede ser 0');
+            } else {
+                input.setCustomValidity('')
+            }
+        }
+    </script>
+{% endblock %}

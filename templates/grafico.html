@@ -1,0 +1,29 @@
+{% extends "resumen_gastos_mensuales.html" %}
+
+{% block chart_content %}
+    <div class="container px-lg-3">
+        <div class="container px-lg-5">
+            <!-- Gráfico -->
+            <div class="text-center">
+                <canvas id="resumenMensual" width="350" height="350"></canvas>
+            </div>
+            <div class="p-3 p-lg-4 bg-light text-center">
+                <p class="m-2" style="font-weight: bold; color: #212529; font-size: 20px;">Total del mes: ${{ total }}</p>
+            </div>
+
+        </div>
+    </div>
+    <script src="{{ url_for('static', filename='grafico.js') }}"></script>
+
+    <script>
+        // Recuperar las variables JSON y analizarlas en JavaScript
+        var categorias = JSON.parse('{{ categorias | tojson | safe }}');
+        var gastos = JSON.parse('{{ gastos | tojson | safe }}');
+        var mes = JSON.parse('{{ mes | tojson | safe }}');
+        var total = JSON.parse('{{ total | tojson | safe }}');
+
+        // Ahora puedes usar las variables labels y datos en JavaScript
+        generarBarChart(categorias, gastos, mes, total);
+    </script>
+
+{% endblock %}

@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="container px-lg-3">
+        <div class="p-3 p-lg-5 bg-light rounded-3 text-center">
+            <div class="row justify-content-center align-items-center"> <!-- Agregamos clases para centrar horizontal y verticalmente -->
+                <div class=" col-xl-5 col-lg-6 ">
+                    <div class="card shadow mb-4">
+                        <!-- Card Header - Dropdown -->
+                        <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                            <h6 class="m-0" style="font-weight: bold; color: #212529; width: 100%;">Grafico de Gastos</h6>
+                        </div>
+                        <div class="card-body text-center bg-light">
+                            <form action="{{ url_for('resumen_gastos_mensuales') }}" method="post">
+                                <div class="mb-3">
+                                    <br>
+                                    <label for="mes" class="form-label"><b>Fecha:</b></label>
+                                    <input type="month" name="mes" id="mes" class="form-control mx-auto" style="width: 45%;" required="required"> <!-- Añade mx-auto y ajusta el ancho con style -->
+                                    <br>
+                                    <br>
+                                    <button type="submit" class="btn btn-primary">Mostrar Resumen</button>
+                                </div>
+                            </form>
+                        </div>
+
+                    </div>
+                </div>
+                <div id="chart-container">
+                    {% block chart_content %}{% endblock %}
+                </div>
+            </div>
+            <div class="text-center">
+                <form action="{{ url_for('index') }}" method="get">
+                    <button type="submit" class="btn btn-primary btn-block btn-large">Regresar</button>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}
